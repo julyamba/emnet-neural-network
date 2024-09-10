@@ -16,20 +16,23 @@
                     >
                 </div>
 
-                <div class="flex items-center gap-4">
-                    <Link href="#" class="btn-primary">+ New Project</Link>
-                </div>
-                <!-- <div v-if="user" class="flex items-center gap-4">
+                <div v-if="user" class="flex items-center gap-4">
                     <div class="text-sm text-gray-500">{{ user.name }}</div>
-                    <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
+                    <!-- <Link :href="route('project.create')" class="btn-primary">+ New Project</Link> -->
+                    <Link href="#" class="btn-primary">+ New Project</Link>
                     <div>
-                        <Link :href="route('logout')" as="button" method="DELETE">Logout</Link>
+                        <Link
+                            :href="route('logout')"
+                            as="button"
+                            method="DELETE"
+                            >Logout</Link
+                        >
                     </div>
                 </div>
                 <div v-else class="flex items-center gap-2">
                     <Link :href="route('user-account.create')">Register</Link>
                     <Link :href="route('login')">Sing-in</Link>
-                </div> -->
+                </div>
             </nav>
         </div>
     </header>

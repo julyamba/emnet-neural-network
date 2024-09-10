@@ -9,9 +9,17 @@ class ProjectController extends Controller
 {
     public function index()
     {
+        $filters = request()->only([
+            'name','orderBy'
+        ]);
+
         return Inertia::render('Project/Index',
         [
-            'projects' => Project::with('owner')->latest()->paginate(15)
+            'filters' => $filters,
+            'projects' => Project::with('owner')
+                ->filter($filters)
+                ->paginate(15)
+                ->withQueryString()
         ]);
     }
 
