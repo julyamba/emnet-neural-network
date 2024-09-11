@@ -10,7 +10,7 @@ class ProjectController extends Controller
     public function index()
     {
         $filters = request()->only([
-            'name','orderBy'
+            'name','orderBy','owner'
         ]);
 
         return Inertia::render('Project/Index',

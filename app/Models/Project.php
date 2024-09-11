@@ -32,11 +32,17 @@ class Project extends Model
         return $query
             ->when(
                 $filters['name'] ?? false,
-                fn ($query, $value) => $query->where('name', $value)
+                fn ($query, $value) => $query->where('name', 'like', '%' . $value . '%')
             )
             ->when(
                 $filters['orderBy'] ?? false,
                 fn ($query, $value) => $query->orderBy('created_at', $value === 'latest' ? 'desc' : 'asc')
+            )
+            ->when(
+                $filters['owner'] ?? false,
+                fn ($query, $value) => $query->whereHas('owner', function ($q) use ($value) {
+                    $q->where('name', 'like', '%' . $value . '%');
+                })
             );
     }
 }

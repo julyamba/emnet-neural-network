@@ -27,6 +27,10 @@
         @apply placeholder:text-gray-400 dark:placeholder:text-gray-600 border border-l-0 border-gray-200 dark:border-gray-700 rounded-t-md rounded-l-none rounded-b-none rounded-r-md text-sm font-medium text-gray-600 dark:bg-gray-800;
     }
 
+    .input-filter-lr {
+        @apply placeholder:text-gray-400 dark:placeholder:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-md text-sm font-medium text-gray-600 dark:bg-gray-800;
+    }
+
     .btn-normal {
         @apply bg-gray-600 hover:bg-gray-500 text-white font-medium px-2 py-1 rounded-md;
     }

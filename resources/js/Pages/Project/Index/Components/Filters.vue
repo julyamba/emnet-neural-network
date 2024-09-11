@@ -25,9 +25,14 @@
                     placeholder="Name"
                     class="input-filter-l w-28"
                 />
+                <input
+                    v-model.number="filterForm.owner"
+                    placeholder="Created by"
+                    class="input-filter-r w-28"
+                />
                 <select
                     v-model="filterForm.orderBy"
-                    class="input-filter-r w-28"
+                    class="input-filter-lr w-28 ml-2"
                 >
                     <option :value="null">Order by</option>
                     <option value="latest">Latest</option>
@@ -49,6 +54,7 @@ const props = defineProps({ filters: Object });
 const filterForm = useForm({
     name: props.filters.name ?? null,
     orderBy: props.filters.orderBy ?? null,
+    owner: props.filters.owner ?? null,
 });
 
 const filter = () => {
@@ -61,6 +67,7 @@ const filter = () => {
 const clear = () => {
     filterForm.name = null;
     filterForm.orderBy = null;
+    filterForm.owner = null;
     filter();
 };
 </script>
