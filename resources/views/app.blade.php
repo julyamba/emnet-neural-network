@@ -18,7 +18,7 @@
     @inertiaHead
 </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300 font-hanken-grotesk h-full">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-300 font-hanken-grotesk h-full">
     @inertia
 </body>
 

@@ -22,7 +22,7 @@
             <div class="flex flex-nowrap items-center">
                 <input
                     v-model.number="filterForm.name"
-                    placeholder="Name"
+                    placeholder="Title"
                     class="input-filter-l w-28"
                 />
                 <input
@@ -41,7 +41,9 @@
             </div>
 
             <button type="submit" class="btn-normal px-5">Filter</button>
-            <button type="reset" @click="clear" class="ml-2">Clear</button>
+            <button type="reset" @click="clear" class="px-4 btn-outline">
+                Clear
+            </button>
         </div>
     </form>
 </template>
