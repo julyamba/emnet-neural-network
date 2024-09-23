@@ -4,17 +4,17 @@
     >
         <div class="container mx-auto">
             <nav class="p-4 flex items-center justify-between">
-                <div class="text-lg font-medium">
-                    <Link href="/">Projects</Link>
-                </div>
-
                 <div
                     class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center"
                 >
-                    <Link href="/" class="tracking-wide uppercase"
-                        >Neural Network</Link
-                    >
+                    <Link href="/">EMNET</Link>
                 </div>
+
+                <!-- <div
+                    class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center"
+                >
+                    <Link href="/" class="tracking-wide uppercase">EMNET</Link>
+                </div> -->
 
                 <div v-if="user" class="flex items-center gap-4">
                     <div class="text-sm text-gray-500">{{ user.name }}</div>
