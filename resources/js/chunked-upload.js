@@ -12,13 +12,26 @@ export function initializeUpload(fileInputId, progressBarId, statusMessageId) {
         return;
     }
 
+    function randomString(length) {
+        const characters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        let result = "";
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(
+                Math.floor(Math.random() * charactersLength)
+            );
+        }
+        return result;
+    }
+
     function uploadFile(file, onProgress, onComplete, onError) {
         const totalChunks = Math.ceil(file.size / chunkSize);
         let currentChunk = 0;
 
         const form = useForm({
             file: null,
-            name: file.name,
+            name: randomString(32) + "." + file.name.split(".").pop(),
             chunk: 0,
             totalChunks: totalChunks,
         });

@@ -16,16 +16,19 @@
             <div id="statusMessage" class="mt-2"></div>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 mt-8">
+        <div class="grid grid-cols-6 gap-4 mt-8">
             <div
                 v-for="video in videos"
                 :key="video.id"
                 class="border p-4 rounded"
             >
-                <h2 class="font-bold">{{ video.title }}</h2>
+                <!-- <h2 class="text-xs">{{ video.title }}</h2> -->
                 <video
                     :src="'/storage/' + video.path"
+                    autoplay
                     controls
+                    loop
+                    muted
                     class="w-full"
                 ></video>
             </div>

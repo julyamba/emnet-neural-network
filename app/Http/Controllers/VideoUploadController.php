@@ -36,9 +36,8 @@ class VideoUploadController extends Controller
         if ($chunk == $totalChunks - 1) {
             // All chunks received, merge the file
             $this->mergeChunks($filename, $totalChunks);
-            return response()->json(['message' => 'File uploaded successfully']);
+            return redirect()->route('video.index');
         }
-
         // return response()->json(['message' => 'Chunk uploaded successfully']);
     }
 

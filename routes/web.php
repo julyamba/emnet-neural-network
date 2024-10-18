@@ -7,9 +7,8 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\VideoUploadController;
 
-Route::get('/', function () {
-    return Inertia::render('VideoUpload');
-});
+
+Route::get('/',[VideoUploadController::class, 'index'])->name('video.index');
 Route::post('/upload', [VideoUploadController::class, 'uploadChunk']);
 
 // Route::redirect('/', '/project');
