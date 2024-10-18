@@ -5,8 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserAccountController;
+use App\Http\Controllers\VideoUploadController;
 
-Route::redirect('/', '/project');
+Route::get('/', function () {
+    return Inertia::render('VideoUpload');
+});
+Route::post('/upload', [VideoUploadController::class, 'uploadChunk']);
+
+// Route::redirect('/', '/project');
 
 Route::resource('project',ProjectController::class);
 
