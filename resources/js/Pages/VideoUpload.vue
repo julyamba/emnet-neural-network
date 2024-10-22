@@ -2,17 +2,14 @@
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Video Upload</h1>
         <div class="mb-4">
-            <input type="file" id="fileInput" accept="video/*" class="mb-2" />
-            <div
-                id="progressBarContainer"
-                class="w-full bg-gray-200 rounded-full h-5 dark:bg-gray-700"
-            >
-                <div
-                    id="progressBar"
-                    class="bg-blue-600 h-5 rounded-full text-sm"
-                    style="width: 0%"
-                ></div>
-            </div>
+            <input
+                type="file"
+                id="fileInput"
+                accept="video/*"
+                multiple
+                class="mb-2"
+            />
+            <div id="progressContainer"></div>
             <div id="statusMessage" class="mt-2"></div>
         </div>
 
@@ -22,11 +19,11 @@
                 :key="video.id"
                 class="border p-4 rounded"
             >
-                <!-- <h2 class="text-xs">{{ video.title }}</h2> -->
+                <h2 class="text-xs mb-2">{{ video.original_name }}</h2>
                 <video
                     :src="'/storage/' + video.path"
-                    autoplay
                     controls
+                    autoplay
                     loop
                     muted
                     class="w-full"
@@ -46,7 +43,7 @@ export default {
     },
     setup() {
         onMounted(() => {
-            initializeUpload("fileInput", "progressBar", "statusMessage");
+            initializeUpload("fileInput", "progressContainer", "statusMessage");
         });
 
         return {};

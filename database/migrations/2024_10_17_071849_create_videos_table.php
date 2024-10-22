@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('original_name')->nullable();
             $table->string('filename');
             $table->string('path');
             $table->string('mime_type');

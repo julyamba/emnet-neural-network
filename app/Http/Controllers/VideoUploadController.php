@@ -11,47 +11,57 @@ class VideoUploadController extends Controller
 {
     public function index()
     {
-        $videos = Video::all();
+        $videos = Video::latest()->get();
         return Inertia::render('VideoUpload', ['videos' => $videos]);
     }
 
     public function uploadChunk(Request $request)
     {
-        // dd($request->input('name'));
         $request->validate([
             'file' => 'required|file',
             'chunk' => 'required|integer',
             'totalChunks' => 'required|integer',
+            'originalName' => 'required|string'
         ]);
 
         $file = $request->file('file');
         $chunk = $request->input('chunk');
         $totalChunks = $request->input('totalChunks');
-
         $filename = $request->input('name');
+        $originalName = $request->input('originalName');
+        
         $chunkFilename = "chunk_{$chunk}_{$filename}";
 
         Storage::disk('local')->putFileAs('tmp_chunks', $file, $chunkFilename);
 
         if ($chunk == $totalChunks - 1) {
             // All chunks received, merge the file
-            $this->mergeChunks($filename, $totalChunks);
-            return redirect()->route('video.index');
+            $this->mergeChunks($filename, $totalChunks, $originalName);
+            // return redirect()->route('video.index');
+            return redirect()->back();
         }
+        
         // return response()->json(['message' => 'Chunk uploaded successfully']);
     }
 
-    private function mergeChunks($filename, $totalChunks)
+    private function mergeChunks($filename, $totalChunks, $originalName)
     {
+        // Ensure the public/videos directory exists
+        Storage::disk('public')->makeDirectory('videos');
+        
         $finalPath = storage_path("app/public/videos/{$filename}");
         $out = fopen($finalPath, "wb");
 
         for ($i = 0; $i < $totalChunks; $i++) {
             $chunkFilename = "chunk_{$i}_{$filename}";
-            $in = fopen(storage_path("app/tmp_chunks/{$chunkFilename}"), "rb");
-            stream_copy_to_stream($in, $out);
-            fclose($in);
-            unlink(storage_path("app/tmp_chunks/{$chunkFilename}"));
+            $chunkPath = storage_path("app/tmp_chunks/{$chunkFilename}");
+            
+            if (file_exists($chunkPath)) {
+                $in = fopen($chunkPath, "rb");
+                stream_copy_to_stream($in, $out);
+                fclose($in);
+                unlink($chunkPath);
+            }
         }
 
         fclose($out);
@@ -60,6 +70,7 @@ class VideoUploadController extends Controller
         Video::create([
             'title' => pathinfo($filename, PATHINFO_FILENAME),
             'filename' => $filename,
+            'original_name' => $originalName,
             'path' => "videos/{$filename}",
             'mime_type' => mime_content_type($finalPath),
             'size' => filesize($finalPath),
