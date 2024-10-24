@@ -23,6 +23,7 @@
                 <video
                     :src="'/storage/' + video.path"
                     controls
+                    autoplay
                     loop
                     muted
                     class="w-full"
