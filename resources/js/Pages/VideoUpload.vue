@@ -9,11 +9,11 @@
                 multiple
                 class="mb-2"
             />
-            <div id="progressContainer"></div>
+            <div id="progressContainer" class="h-4 text-[10px]"></div>
             <div id="statusMessage" class="mt-2"></div>
         </div>
 
-        <div class="grid grid-cols-6 gap-4 mt-8">
+        <div class="grid grid-cols-6 gap-4 mt-10">
             <div
                 v-for="video in videos"
                 :key="video.id"
@@ -24,8 +24,6 @@
                     v-if="video.mime_type.startsWith('video/')"
                     :src="'/storage/' + video.path"
                     controls
-                    autoplay
-                    loop
                     muted
                     class="w-full"
                 ></video>
