@@ -1,11 +1,11 @@
 <template>
     <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Video Upload</h1>
+        <h1 class="text-2xl font-bold mb-4">Media Upload</h1>
         <div class="mb-4">
             <input
                 type="file"
                 id="fileInput"
-                accept="video/*"
+                accept="video/*,image/*"
                 multiple
                 class="mb-2"
             />
@@ -21,6 +21,7 @@
             >
                 <h2 class="text-xs mb-2">{{ video.original_name }}</h2>
                 <video
+                    v-if="video.mime_type.startsWith('video/')"
                     :src="'/storage/' + video.path"
                     controls
                     autoplay
@@ -28,6 +29,12 @@
                     muted
                     class="w-full"
                 ></video>
+                <img
+                    v-else-if="video.mime_type.startsWith('image/')"
+                    :src="'/storage/' + video.path"
+                    class="w-full"
+                    alt="Uploaded image"
+                />
             </div>
         </div>
     </div>
@@ -50,3 +57,8 @@ export default {
     },
 };
 </script>
+<style>
+.bg-blue-600 {
+    background-color: #2563eb; /* Tailwind's blue-600 color */
+}
+</style>
