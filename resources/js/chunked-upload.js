@@ -53,7 +53,7 @@ export function initializeUpload(
         return { wrapper: progressBarWrapper, bar: progressBar };
     }
 
-    async function uploadFile(file, progressBar) {
+    async function uploadFile(file, progressBar, progressBarWrapper) {
         const totalChunks = Math.ceil(file.size / chunkSize);
         let currentChunk = 0;
 
@@ -88,6 +88,8 @@ export function initializeUpload(
                         if (currentChunk < totalChunks) {
                             uploadNextChunk();
                         } else {
+                            // Hide the progress bar wrapper when upload is complete
+                            progressBarWrapper.style.display = "none";
                             resolve();
                         }
                     },
@@ -112,7 +114,7 @@ export function initializeUpload(
             for (const file of files) {
                 const { wrapper, bar } = createProgressBar(file);
                 progressContainer.appendChild(wrapper);
-                await uploadFile(file, bar);
+                await uploadFile(file, bar, wrapper);
             }
             statusMessage.textContent = "All uploads complete!";
             // Refresh the page or emit an event to update the video list
