@@ -118,7 +118,7 @@ export function initializeUpload(
             }
             statusMessage.textContent = "All uploads complete!";
             // Refresh the page or emit an event to update the video list
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             statusMessage.textContent = "One or more uploads failed.";
             console.error("Upload error:", error);
