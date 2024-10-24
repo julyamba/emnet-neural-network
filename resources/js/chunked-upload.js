@@ -30,13 +30,13 @@ export function initializeUpload(
         return result;
     }
 
-    function createProgressBar(file) {
+    function createProgressBar(file, index, totalFiles) {
         const progressBarWrapper = document.createElement("div");
         progressBarWrapper.className = "mb-4";
 
         const fileNameDiv = document.createElement("div");
         fileNameDiv.className = "text-sm mb-1";
-        fileNameDiv.textContent = file.name;
+        fileNameDiv.textContent = `(${index + 1}/${totalFiles}) ${file.name}`;
 
         const progressBarContainer = document.createElement("div");
         progressBarContainer.className =
@@ -106,13 +106,21 @@ export function initializeUpload(
         const files = Array.from(e.target.files);
         if (files.length === 0) return;
 
+        // Disable the file input
+        fileInput.disabled = true;
+
         // Clear previous progress bars
         progressContainer.innerHTML = "";
         statusMessage.textContent = "";
 
         try {
-            for (const file of files) {
-                const { wrapper, bar } = createProgressBar(file);
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const { wrapper, bar } = createProgressBar(
+                    file,
+                    i,
+                    files.length
+                );
                 progressContainer.appendChild(wrapper);
                 await uploadFile(file, bar, wrapper);
             }
@@ -123,6 +131,10 @@ export function initializeUpload(
         } catch (error) {
             statusMessage.textContent = "One or more uploads failed.";
             console.error("Upload error:", error);
+        } finally {
+            // Re-enable the file input and reset it
+            fileInput.disabled = false;
+            fileInput.value = ""; // Reset the file input
         }
     });
 }
