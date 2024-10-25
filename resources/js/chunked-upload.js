@@ -40,10 +40,10 @@ export function initializeUpload(
 
         const progressBarContainer = document.createElement("div");
         progressBarContainer.className =
-            "w-full bg-gray-200 rounded-full dark:bg-gray-500";
+            "w-full bg-gray-200 dark:bg-gray-500 rounded-full";
 
         const progressBar = document.createElement("div");
-        progressBar.className = "bg-blue-600 rounded-full text-[4px]";
+        progressBar.className = "bg-blue-600 rounded-full text-[10px]";
         progressBar.style.width = "0%";
 
         progressBarContainer.appendChild(progressBar);

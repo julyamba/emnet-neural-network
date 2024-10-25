@@ -9,11 +9,11 @@
                 multiple
                 class="mb-2"
             />
-            <div id="progressContainer" class="h-4 text-[10px]"></div>
+            <div id="progressContainer" class="h-4 mt-2"></div>
             <div id="statusMessage" class="mt-2"></div>
         </div>
 
-        <div class="grid grid-cols-6 gap-4 mt-10">
+        <div class="grid grid-cols-6 gap-4 mt-14">
             <div
                 v-for="video in videos"
                 :key="video.id"
@@ -55,8 +55,3 @@ export default {
     },
 };
 </script>
-<style>
-.bg-blue-600 {
-    background-color: #2563eb; /* Tailwind's blue-600 color */
-}
-</style>
